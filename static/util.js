@@ -4,7 +4,9 @@ const ajaxUrl = ''; //'http://localhost:8011'; //发布时改完空
 var util = {
 	index: '/customerrecommend/queryindex', //首页数据
 	uploadexcel: '/customerrecommend/uploadexcel', //文件上传
-	query: '/customerrecommend/query', //筛选查询
+	queryChart: '/customerrecommend/query/chart', //筛选查询
+	queryNum: '/customerrecommend/query/num', //筛选查询
+	queryFenduan: '/customerrecommend/query/fenduan', //筛选查询
 	historylist: '/customerrecommend/historylist', //历史记录
 	historydata: '/customerrecommend/historydata', //历史记录详情
 	pushdata: '/customerrecommend/pushdata' //推送名单
