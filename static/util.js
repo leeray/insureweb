@@ -162,7 +162,7 @@ util.Organization = [{
 //form 表单方式提交
 util.ajax = axios.create({
 	baseURL: ajaxUrl,
-	timeout: 10000,
+	timeout: 300000,
 	withCredentials: true // default
 });
 //ajax 拦截器
@@ -194,7 +194,7 @@ util.ajax.defaults.transformRequest = [function(data) {
 //body数据方式提交
 util.ajaxByBody = axios.create({
 	baseURL: ajaxUrl,
-	timeout: 10000,
+	timeout: 300000,
 	withCredentials: true// default
 });
 //ajax 拦截器
