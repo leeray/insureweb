@@ -4113,6 +4113,12 @@ __webpack_require__(263);
 			files: [],
 			basePar: {},
 			form: {
+				kh_zhongji: [0, 0],
+				kh_yiwai: [0, 0],
+				kh_yanglao: [0, 0],
+				kh_defe: [0, 0],
+				kh_nianling: [0, 0],
+				kh_wanneng_yu_e_qj: [0, 0],
 				khdt: '',
 				kh_sex: '0',
 				kh_channels: '0',
@@ -4127,7 +4133,8 @@ __webpack_require__(263);
 				nl: ['', '10', '20', '30', '40', '50', '60', '70', '80', '90', '100'],
 				vip: ['', 'VIP1', 'VIP2', 'VIP3', 'VIP4', 'VIP5'],
 				srdj: ['', '一级', '二级', '三级'],
-				baoer: ['', '10万', '20万', '30万', '40万', '50万'] },
+				baoer: ['', '10万', '20万', '30万', '40万', '50万'],
+				wnyr: ['', '1万', '2万', '3万', '4万', '5万', '6万', '7万', '8万', '9万', '10万'] },
 			sliderForm: {
 				'一级': 1,
 				'二级': 2,
@@ -4144,6 +4151,7 @@ __webpack_require__(263);
 				'50万': 500000
 			},
 			sfq: {
+				qd: true,
 				khxx: true,
 				scmd: true,
 				khgmxw: true,
@@ -4187,6 +4195,10 @@ __webpack_require__(263);
 	},
 	methods: {
 		pushClick: function pushClick() {
+			if (!__WEBPACK_IMPORTED_MODULE_2__static_util__["a" /* default */].queryrandomid) {
+				$toast.show('请先筛选推送数据!', 1500);
+				return;
+			}
 			var _this = this;
 			this.$router.push({
 				path: '/push',
@@ -4243,8 +4255,6 @@ __webpack_require__(263);
 			}).catch(function (err) {
 				$toast.show('获取数据失败!', 1500);
 				console.log(err);
-
-				$loading.hide();
 			});
 		},
 		checkSfq: function checkSfq(v) {
@@ -4291,26 +4301,83 @@ __webpack_require__(263);
 			this.form = JSON.parse(this.form2);
 		},
 		shaixuanOk: function shaixuanOk() {
-			this.form;
-			debugger;
-
 			if (this.files && this.files.length > 0 && this.files[0].data.kh_file_type == this.form.kh_file_type && !this.files[0].success) {
 
 				$loading.show('上传名单，请稍后...');
 				this.$refs.upload.active = true;
 			} else {
+				this.form.kh_file_type = '0';
 				this.shaixuanPost();
 			}
 		},
 		shaixuanPost: function shaixuanPost() {
 			var _this6 = this;
 
-			debugger;
 			var form = JSON.parse(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_core_js_json_stringify___default()(this.form));
 			form.gl_jigouhao = this.getjigouhao();
 			form.uid = this.basePar.uid;
 			form.zhuti = this.basePar.zhuti;
 
+			if (form.kh_zhongji) {
+				if (form.kh_zhongji[0] == '' && form.kh_zhongji[1] == '') {
+					form.kh_zhongji = 0;
+				} else if (form.kh_zhongji[0] == '' && form.kh_zhongji[1] != '') {
+					form.kh_zhongji = '0-' + form.kh_zhongji[1].replace(/万/g, "0000");
+				} else {
+					form.kh_zhongji = form.kh_zhongji.join('-').replace(/万/g, "0000");
+				}
+			}
+
+			if (form.kh_yiwai) {
+				if (form.kh_yiwai[0] == '' && form.kh_yiwai[1] == '') {
+					form.kh_yiwai = 0;
+				} else if (form.kh_yiwai[0] == '' && form.kh_yiwai[1] != '') {
+					form.kh_yiwai = '0-' + form.kh_yiwai[1].replace(/万/g, "0000");
+				} else {
+					form.kh_yiwai = form.kh_yiwai.join('-').replace(/万/g, "0000");
+				}
+			}
+
+			if (form.kh_yanglao) {
+				if (form.kh_yanglao[0] == '' && form.kh_yanglao[1] == '') {
+					form.kh_yanglao = 0;
+				} else if (form.kh_yanglao[0] == '' && form.kh_yanglao[1] != '') {
+					form.kh_yanglao = '0-' + form.kh_yanglao[1].replace(/万/g, "0000");
+				} else {
+					form.kh_yanglao = form.kh_yanglao.join('-').replace(/万/g, "0000");
+				}
+			}
+
+			if (form.kh_defe) {
+				if (form.kh_defe[0] == '' && form.kh_defe[1] == '') {
+					form.kh_defe = 0;
+				} else if (form.kh_defe[0] == '' && form.kh_defe[1] != '') {
+					form.kh_defe = '0-' + form.kh_nianling[1];
+				} else {
+					form.kh_defe = form.kh_defe.join('-');
+				}
+			}
+
+			if (form.kh_nianling) {
+				if (form.kh_nianling[0] == '' && form.kh_nianling[1] == '') {
+					form.kh_nianling = 0;
+				} else if (form.kh_nianling[0] == '' && form.kh_nianling[1] != '') {
+					form.kh_nianling = '0-' + form.kh_nianling[1];
+				} else {
+					form.kh_nianling = form.kh_nianling.join('-');
+				}
+			}
+
+			if (form.kh_wanneng_yu_e == '1') {
+				if (form.kh_wanneng_yu_e_qj[0] == '' && form.kh_wanneng_yu_e_qj[1] == '') {
+					form.kh_wanneng_yu_e = 0;
+				} else if (form.kh_wanneng_yu_e_qj[0] == '' && form.kh_wanneng_yu_e_qj[1] != '') {
+					form.kh_wanneng_yu_e = '0-' + form.kh_wanneng_yu_e_qj[1].replace(/万/g, "0000");
+				} else {
+					form.kh_wanneng_yu_e = form.kh_wanneng_yu_e_qj.join('-').replace(/万/g, "0000");
+				}
+			}
+			debugger;
 			for (var i in form) {
 				if (this.sliderForm[form[i]]) {
 					form[i] = this.sliderForm[form[i]];
@@ -4320,16 +4387,18 @@ __webpack_require__(263);
 			$loading.show('正在查询，请稍后...');
 
 			__WEBPACK_IMPORTED_MODULE_2__static_util__["a" /* default */].ajax.post(__WEBPACK_IMPORTED_MODULE_2__static_util__["a" /* default */].query, form).then(function (res) {
+				debugger;
+				__WEBPACK_IMPORTED_MODULE_2__static_util__["a" /* default */].queryrandomid = res.randomid;
 				_this6.chartData = res;
 				_this6.initChart();
 				$loading.hide();
 			}).catch(function (err) {
 				$toast.show('提交筛选数据失败!', 1500);
 				console.log(err);
-
-				$loading.hide();
 			});
 			this.shaiXuan();
+
+			this.form.kh_file_type = '1';
 		},
 		getjigouhao: function getjigouhao() {
 			return this.checkOrg.name;
@@ -4512,9 +4581,17 @@ __webpack_require__(263);
 			this.initChart();
 		},
 		shaiXuanRadio: function shaiXuanRadio(key, value) {
+			var _this7 = this;
+
 			var obj = {};
 			obj[key] = value;
 			this.form = __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_assign___default()({}, this.form, obj);
+
+			if (key == 'kh_wanneng_yu_e') {
+				setTimeout(function () {
+					if (_this7.$refs.scroller) _this7.$refs.scroller.resize();
+				});
+			}
 		},
 		menuClicked: function menuClicked(index) {
 			this.tabIndex = index;
@@ -4532,6 +4609,60 @@ __webpack_require__(263);
 		}
 	},
 	computed: {
+		kh_yanglao: function kh_yanglao() {
+			if (this.form.kh_yanglao[0] == '' && this.form.kh_yanglao[1] == '') {
+				return '无限制';
+			}
+			if (this.form.kh_yanglao[0] == '' && this.form.kh_yanglao[1] != '') {
+				return '0 - ' + this.form.kh_yanglao[1];
+			}
+			return this.form.kh_yanglao[0] + ' - ' + this.form.kh_yanglao[1];
+		},
+		kh_yiwai: function kh_yiwai() {
+			if (this.form.kh_yiwai[0] == '' && this.form.kh_yiwai[1] == '') {
+				return '无限制';
+			}
+			if (this.form.kh_yiwai[0] == '' && this.form.kh_yiwai[1] != '') {
+				return '0 - ' + this.form.kh_yiwai[1];
+			}
+			return this.form.kh_yiwai[0] + ' - ' + this.form.kh_yiwai[1];
+		},
+		kh_zhongji: function kh_zhongji() {
+			if (this.form.kh_zhongji[0] == '' && this.form.kh_zhongji[1] == '') {
+				return '无限制';
+			}
+			if (this.form.kh_zhongji[0] == '' && this.form.kh_zhongji[1] != '') {
+				return '0 - ' + this.form.kh_zhongji[1];
+			}
+			return this.form.kh_zhongji[0] + ' - ' + this.form.kh_zhongji[1];
+		},
+		kh_wanneng_yu_e_qj: function kh_wanneng_yu_e_qj() {
+			if (this.form.kh_wanneng_yu_e_qj[0] == '' && this.form.kh_wanneng_yu_e_qj[1] == '') {
+				return '无限制';
+			}
+			if (this.form.kh_wanneng_yu_e_qj[0] == '' && this.form.kh_wanneng_yu_e_qj[1] != '') {
+				return '0 - ' + this.form.kh_wanneng_yu_e_qj[1];
+			}
+			return this.form.kh_wanneng_yu_e_qj[0] + ' - ' + this.form.kh_wanneng_yu_e_qj[1];
+		},
+		kh_defe: function kh_defe() {
+			if (this.form.kh_defe[0] == '' && this.form.kh_defe[1] == '') {
+				return '无限制';
+			}
+			if (this.form.kh_defe[0] == '' && this.form.kh_defe[1] != '') {
+				return '0 - ' + this.form.kh_defe[1] + '分';
+			}
+			return this.form.kh_defe[0] + ' - ' + this.form.kh_defe[1] + '分';
+		},
+		kh_nianling: function kh_nianling() {
+			if (this.form.kh_nianling[0] == '' && this.form.kh_nianling[1] == '') {
+				return '无限制';
+			}
+			if (this.form.kh_nianling[0] == '' && this.form.kh_nianling[1] != '') {
+				return '0 - ' + this.form.kh_nianling[1] + '岁';
+			}
+			return this.form.kh_nianling[0] + ' - ' + this.form.kh_nianling[1] + '岁';
+		},
 		backButtonText: function backButtonText() {
 			return '  ';
 		},
@@ -4815,11 +4946,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			}
 
 			var data = this.from;
-			data.randomid = __WEBPACK_IMPORTED_MODULE_0__static_util__["a" /* default */].randomid;
+			data.randomid = __WEBPACK_IMPORTED_MODULE_0__static_util__["a" /* default */].queryrandomid;
 			$loading.show('正在推送...');
 			__WEBPACK_IMPORTED_MODULE_0__static_util__["a" /* default */].ajax.post(__WEBPACK_IMPORTED_MODULE_0__static_util__["a" /* default */].pushdata, data).then(function (res) {
 				debugger;
-				$loading.hide();
 				if (res.status == 200) {
 					$toast.show(res.message, 1500).then(function () {
 						_this.back();
@@ -4828,7 +4958,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 					$toast.show(res.message, 1500);
 				}
 			}).catch(function (err) {
-				$toast.show('推送失败失败!', 1500);
+				$toast.show('推送失败!', 1500);
 				console.log(err);
 			});
 		},
@@ -6084,6 +6214,72 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "item-icon-right"
   }, [_c('span', {
     staticClass: "iconfont icon-kehuxinxi"
+  }), _vm._v("渠道\n\t\t\t\t\t\t\t\t\t"), (_vm.sfq['qd']) ? _c('i', {
+    staticClass: "icon ion-ios-arrow-up",
+    staticStyle: {
+      "color": "#DDD"
+    },
+    on: {
+      "click": function($event) {
+        $event.stopPropagation();
+        return _vm.checkSfq('qd')
+      }
+    }
+  }) : _c('i', {
+    staticClass: "icon ion-ios-arrow-down",
+    staticStyle: {
+      "color": "#DDD"
+    },
+    on: {
+      "click": function($event) {
+        $event.stopPropagation();
+        return _vm.checkSfq('qd')
+      }
+    }
+  })]), _vm._v(" "), _c('transition', {
+    attrs: {
+      "name": "draw"
+    }
+  }, [_c('div', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.sfq['qd']),
+      expression: "sfq['qd']"
+    }],
+    staticClass: "sfq"
+  }, [_c('div', {
+    staticClass: "item-divider"
+  }, [_vm._v("\n\t\t\t\t\t\t\t\t\t\t\t渠道\n\t\t\t\t\t\t\t\t\t\t\t"), _c('div', {
+    staticClass: "legendbox"
+  }, [_c('div', {
+    staticClass: "hitem",
+    class: _vm.form.kh_channels == '0' ? 'action' : '',
+    on: {
+      "click": function($event) {
+        return _vm.shaiXuanRadio('kh_channels', '0')
+      }
+    }
+  }, [_vm._v("全部")]), _vm._v(" "), _c('div', {
+    staticClass: "hitem",
+    class: _vm.form.kh_channels == '1' ? 'action' : '',
+    on: {
+      "click": function($event) {
+        return _vm.shaiXuanRadio('kh_channels', '1')
+      }
+    }
+  }, [_vm._v("\n\t\t\t\t\t\t\t\t\t\t\t\t\t个险\n\t\t\t\t\t\t\t\t\t\t\t\t")]), _vm._v(" "), _c('div', {
+    staticClass: "hitem",
+    class: _vm.form.kh_channels == '2' ? 'action' : '',
+    on: {
+      "click": function($event) {
+        return _vm.shaiXuanRadio('kh_channels', '2')
+      }
+    }
+  }, [_vm._v("\n\t\t\t\t\t\t\t\t\t\t\t\t\t银保")])])])])]), _vm._v(" "), _c('item', {
+    staticClass: "item-icon-right"
+  }, [_c('span', {
+    staticClass: "iconfont icon-kehuxinxi"
   }), _vm._v("客户信息\n\t\t\t\t\t\t\t\t\t"), (_vm.sfq['khxx']) ? _c('i', {
     staticClass: "icon ion-ios-arrow-up",
     staticStyle: {
@@ -6120,12 +6316,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "sfq"
   }, [_c('div', {
     staticClass: "item-divider"
-  }, [_vm._v("客户得分 "), _c('span', [_vm._v(_vm._s(_vm.form.kh_defe || '无限制'))])]), _vm._v(" "), _c('div', {
+  }, [_vm._v("客户得分 "), _c('span', [_vm._v(_vm._s(_vm.kh_defe || '无限制'))])]), _vm._v(" "), _c('div', {
     staticClass: "sfqitem"
   }, [_c('vue-slider', {
     attrs: {
       "marks": true,
-      "data": _vm.slider.khdf,
+      "data": _vm.slider.nl,
       "contained": true
     },
     scopedSlots: _vm._u([{
@@ -6178,35 +6374,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_vm._v("\n\t\t\t\t\t\t\t\t\t\t\t\t\t女")])])]), _vm._v(" "), _c('div', {
     staticClass: "item-divider"
-  }, [_vm._v("\n\t\t\t\t\t\t\t\t\t\t\t渠道\n\t\t\t\t\t\t\t\t\t\t\t"), _c('div', {
-    staticClass: "legendbox"
-  }, [_c('div', {
-    staticClass: "hitem",
-    class: _vm.form.kh_channels == '0' ? 'action' : '',
-    on: {
-      "click": function($event) {
-        return _vm.shaiXuanRadio('kh_channels', '0')
-      }
-    }
-  }, [_vm._v("全部")]), _vm._v(" "), _c('div', {
-    staticClass: "hitem",
-    class: _vm.form.kh_channels == '1' ? 'action' : '',
-    on: {
-      "click": function($event) {
-        return _vm.shaiXuanRadio('kh_channels', '1')
-      }
-    }
-  }, [_vm._v("\n\t\t\t\t\t\t\t\t\t\t\t\t\t个险\n\t\t\t\t\t\t\t\t\t\t\t\t")]), _vm._v(" "), _c('div', {
-    staticClass: "hitem",
-    class: _vm.form.kh_channels == '2' ? 'action' : '',
-    on: {
-      "click": function($event) {
-        return _vm.shaiXuanRadio('kh_channels', '2')
-      }
-    }
-  }, [_vm._v("\n\t\t\t\t\t\t\t\t\t\t\t\t\t银保")])])]), _vm._v(" "), _c('div', {
-    staticClass: "item-divider"
-  }, [_vm._v("年龄"), _c('span', [_vm._v(_vm._s(_vm.form.kh_nianling || '无限制'))])]), _vm._v(" "), _c('div', {
+  }, [_vm._v("年龄"), _c('span', [_vm._v(_vm._s(_vm.kh_nianling || '无限制'))])]), _vm._v(" "), _c('div', {
     staticClass: "sfqitem"
   }, [_c('vue-slider', {
     attrs: {
@@ -6658,7 +6826,37 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         return _vm.shaiXuanRadio('kh_wanneng_yu_e', '2')
       }
     }
-  }, [_vm._v("否")])])])])]), _vm._v(" "), _c('item', {
+  }, [_vm._v("否")])])]), _vm._v(" "), (_vm.form.kh_wanneng_yu_e == '1') ? _c('div', {
+    staticClass: "item-divider"
+  }, [_vm._v("万能余额区间 "), _c('span', [_vm._v(_vm._s(_vm.kh_wanneng_yu_e_qj || '无限制'))])]) : _vm._e(), _vm._v(" "), (_vm.form.kh_wanneng_yu_e == '1') ? _c('div', {
+    staticClass: "sfqitem"
+  }, [_c('vue-slider', {
+    attrs: {
+      "marks": true,
+      "data": _vm.slider.wnyr,
+      "contained": true
+    },
+    scopedSlots: _vm._u([{
+      key: "label",
+      fn: function(ref) {
+        var label = ref.label;
+        var active = ref.active;
+
+        return [_c('div', {
+          class: ['vue-slider-mark-label', 'custom-label', {
+            active: active
+          }]
+        }, [_vm._v(_vm._s(label))])]
+      }
+    }], null, false, 1463015463),
+    model: {
+      value: (_vm.form.kh_wanneng_yu_e_qj),
+      callback: function($$v) {
+        _vm.$set(_vm.form, "kh_wanneng_yu_e_qj", $$v)
+      },
+      expression: "form.kh_wanneng_yu_e_qj"
+    }
+  })], 1) : _vm._e()])]), _vm._v(" "), _c('item', {
     staticClass: "item-icon-right"
   }, [_c('span', {
     staticClass: "iconfont icon-baoxian"
@@ -6698,7 +6896,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "sfq"
   }, [_c('div', {
     staticClass: "item-divider"
-  }, [_vm._v("重疾保障保额"), _c('span', [_vm._v(_vm._s(_vm.form.kh_zhongji || '无限制'))])]), _vm._v(" "), _c('div', {
+  }, [_vm._v("重疾保障保额"), _c('span', [_vm._v(_vm._s(_vm.kh_zhongji || '无限制'))])]), _vm._v(" "), _c('div', {
     staticClass: "sfqitem"
   }, [_c('vue-slider', {
     attrs: {
@@ -6728,7 +6926,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   })], 1), _vm._v(" "), _c('div', {
     staticClass: "item-divider"
-  }, [_vm._v("意外保障保额"), _c('span', [_vm._v(_vm._s(_vm.form.kh_yiwai || '无限制'))])]), _vm._v(" "), _c('div', {
+  }, [_vm._v("意外保障保额"), _c('span', [_vm._v(_vm._s(_vm.kh_yiwai || '无限制'))])]), _vm._v(" "), _c('div', {
     staticClass: "sfqitem"
   }, [_c('vue-slider', {
     attrs: {
@@ -6758,7 +6956,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   })], 1), _vm._v(" "), _c('div', {
     staticClass: "item-divider"
-  }, [_vm._v("养老保障保额"), _c('span', [_vm._v(_vm._s(_vm.form.kh_yanglao || '无限制'))])]), _vm._v(" "), _c('div', {
+  }, [_vm._v("养老保障保额"), _c('span', [_vm._v(_vm._s(_vm.kh_yanglao || '无限制'))])]), _vm._v(" "), _c('div', {
     staticClass: "sfqitem"
   }, [_c('vue-slider', {
     attrs: {
@@ -8646,4 +8844,4 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 
 /***/ })
 ]),[215]);
-//# sourceMappingURL=app.f6882a94ed857a88fd8f.js.map
+//# sourceMappingURL=app.0de16ed38697e8e915a8.js.map
