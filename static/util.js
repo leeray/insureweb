@@ -2,7 +2,8 @@ import axios from 'axios';
 const ajaxUrl = ''; //'http://localhost:8011'; //发布时改完空
 
 var util = {
-	index: '/customerrecommend/queryindex', //首页数据
+	index: '/customerrecommend/queryindex/chart', //首页数据
+	indexnum: '/customerrecommend/queryindex/num', //首页数据
 	uploadexcel: '/customerrecommend/uploadexcel', //文件上传
 	queryChart: '/customerrecommend/query/chart', //筛选查询
 	queryNum: '/customerrecommend/query/num', //筛选查询
