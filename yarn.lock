@@ -1143,6 +1143,10 @@ core-js@^2.4.0:
   version "2.4.1"
   resolved "http://registry.npm.taobao.org/core-js/download/core-js-2.4.1.tgz#4de911e667b0eae9124e34254b53aea6fc618d3e"
 
+core-js@^3.6.5:
+  version "3.8.1"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.8.1.tgz#f51523668ac8a294d1285c3b9db44025fda66d47"
+
 core-util-is@~1.0.0:
   version "1.0.2"
   resolved "http://registry.npm.taobao.org/core-util-is/download/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
@@ -2035,8 +2039,8 @@ inherits@2.0.1:
   resolved "http://registry.npm.taobao.org/inherits/download/inherits-2.0.1.tgz#b17d08d326b4423e568eff719f91b0b1cbdf69f1"
 
 ini@^1.3.4, ini@~1.3.0:
-  version "1.3.4"
-  resolved "http://registry.npm.taobao.org/ini/download/ini-1.3.4.tgz#0537cb79daf59b59a1a517dff706c86ec039162e"
+  version "1.3.7"
+  resolved "https://registry.yarnpkg.com/ini/-/ini-1.3.7.tgz#a09363e1911972ea16d7a8851005d84cf09a9a84"
 
 interpret@^1.0.0:
   version "1.0.1"
@@ -3735,6 +3739,10 @@ svgo@^0.7.0:
     sax "~1.2.1"
     whet.extend "~0.9.9"
 
+swipe-js-iso@^2.0.3:
+  version "2.1.5"
+  resolved "https://registry.yarnpkg.com/swipe-js-iso/-/swipe-js-iso-2.1.5.tgz#9b0eea8b9740487e6169d655184fc6440b6a2e34"
+
 tapable@^0.2.5, tapable@~0.2.5:
   version "0.2.6"
   resolved "http://registry.npm.taobao.org/tapable/download/tapable-0.2.6.tgz#206be8e188860b514425375e6f1ae89bfb01fd8d"
@@ -3917,17 +3925,28 @@ vm-browserify@0.0.4:
   dependencies:
     indexof "0.0.1"
 
-vonic@^2.0.0-beta.10:
-  version "2.0.0-beta.10"
-  resolved "http://registry.npm.taobao.org/vonic/download/vonic-2.0.0-beta.10.tgz#13b7589bb8a0ea0d7ca18725bc02a2f0a15e214e"
+vonic@^2.0.0-beta.15:
+  version "2.0.0-rc.1"
+  resolved "https://registry.yarnpkg.com/vonic/-/vonic-2.0.0-rc.1.tgz#0a13f7e2926187e923fac2c66653ff2e826cb216"
   dependencies:
     axios "^0.15.3"
     es6-promise "^4.0.5"
     fastclick "^1.0.6"
     object-assign "^4.1.1"
+    vswipe "1.0.0"
     vue "^2.1.8"
     vue-router "^2.1.0"
-    vue-scroller "2.2.0-alpha.2"
+    vue-scroller "2.2.0-alpha.3"
+
+vswipe@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/vswipe/-/vswipe-1.0.0.tgz#fcd084d1664c5006ba063d63044e1b9aad6fd922"
+  dependencies:
+    swipe-js-iso "^2.0.3"
+
+vue-class-component@^7.1.0:
+  version "7.2.6"
+  resolved "https://registry.yarnpkg.com/vue-class-component/-/vue-class-component-7.2.6.tgz#8471e037b8e4762f5a464686e19e5afc708502e4"
 
 vue-hot-reload-api@^2.0.1:
   version "2.0.11"
@@ -3949,16 +3968,29 @@ vue-loader@^10.3.0:
     vue-style-loader "^2.0.0"
     vue-template-es2015-compiler "^1.2.2"
 
+vue-property-decorator@^8.0.0:
+  version "8.5.1"
+  resolved "https://registry.yarnpkg.com/vue-property-decorator/-/vue-property-decorator-8.5.1.tgz#571a91cf8d2b507f537d79bf8275af3184572fff"
+  dependencies:
+    vue-class-component "^7.1.0"
+
 vue-router@^2.1.0:
   version "2.3.0"
   resolved "http://registry.npm.taobao.org/vue-router/download/vue-router-2.3.0.tgz#a25c8359e8ca989d22ce79f64322eb0ad0c8670f"
 
-vue-scroller@2.2.0-alpha.2:
-  version "2.2.0-alpha.2"
-  resolved "http://registry.npm.taobao.org/vue-scroller/download/vue-scroller-2.2.0-alpha.2.tgz#20415871b500d5a7528a1e34154a5a0ffb3fb30c"
+vue-scroller@2.2.0-alpha.3:
+  version "2.2.0-alpha.3"
+  resolved "https://registry.yarnpkg.com/vue-scroller/-/vue-scroller-2.2.0-alpha.3.tgz#a1fa27b982cef182d2eac00d3aade7c659ce57f5"
   dependencies:
     vue "^2.1.0"
     vue-router "^2.1.0"
+
+vue-slider-component@^3.0.30:
+  version "3.2.11"
+  resolved "https://registry.yarnpkg.com/vue-slider-component/-/vue-slider-component-3.2.11.tgz#79e338dc5a32ca927a8f79ee55256197bd785235"
+  dependencies:
+    core-js "^3.6.5"
+    vue-property-decorator "^8.0.0"
 
 vue-style-loader@^2.0.0:
   version "2.0.3"
@@ -3977,6 +4009,10 @@ vue-template-compiler@^2.1.10:
 vue-template-es2015-compiler@^1.2.2:
   version "1.5.1"
   resolved "http://registry.npm.taobao.org/vue-template-es2015-compiler/download/vue-template-es2015-compiler-1.5.1.tgz#0c36cc57aa3a9ec13e846342cb14a72fcac8bd93"
+
+vue-upload-component@^2.8.20:
+  version "2.8.20"
+  resolved "https://registry.yarnpkg.com/vue-upload-component/-/vue-upload-component-2.8.20.tgz#60824d3f20f3216dca90d8c86a5c980851b04ea0"
 
 vue@^2.1.0, vue@^2.1.8:
   version "2.2.1"
